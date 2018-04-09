@@ -36,7 +36,7 @@ class UserBrowser extends Component {
         } else {
         
             let currentID = this.state.currentUserId;
-            
+            console.log(this.props.userData);
         return (
             <article className="section columns">
                 <section className="column">

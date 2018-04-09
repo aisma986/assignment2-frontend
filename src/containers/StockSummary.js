@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 //import stocks from '../data/stocks.json';
-//import axios from 'axios';
+import axios from 'axios';
 import BarChart from './BarChart.js';
 
 class StockSummary extends Component {
@@ -8,19 +8,26 @@ class StockSummary extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            path: this.props.path,
+            path: this.props.userPath,
+            //info: this.props.match.params.symbol,
+            stocks: [],
+            symbol: null,
+            sector: null,
+            subIndustry: null,
+            address: null,
             
             closePrice: []
         };
     }
     
- /*       componentDidMount() {
-       axios.get('https://comp4513assignment2-backend.herokuapp.com/api/average/prices/AMZN')
+        componentDidMount() {
+       axios.get('https://comp4513assignment2-backend.herokuapp.com/api/company/' + this.state.path)
             .then(response => {
-                this.setState({users: response.data});
-                this.setState({addresses: response.data.address});
-                this.setState({geoLoc: response.data.address.geo});
-                this.setState({companies: response.data.company});
+                this.setState({stocks: response.data});
+                this.setState({symbol: response.data[0].symbol});
+                this.setState({symbol: response.data[0].sector});
+                this.setState({symbol: response.data[0].subindustry});
+                this.setState({symbol: response.data[0].address});
                 
             }) 
             
@@ -28,15 +35,17 @@ class StockSummary extends Component {
                 alert('Error with api call error=' + error);
             });
     }
-    */
+    
     render() {
         
-        /*let symbolName = this.state.path;
+/*        let symbolName = this.state.path;
         let singleStock = stocks.filter(function(stockSymbol) { 
             return stockSymbol.symbol === symbolName;
             
         });*/
-
+        console.log(this.props.userPath);
+        console.log(this.state.stocks);
+        console.log(this.state.symbol);
         return (
                 <section className="column">
                     <nav className="panel">
@@ -56,23 +65,23 @@ class StockSummary extends Component {
                                             </div>
                                             <div className="message-body">
                                                 <div className="card-Content">
-                                                    <strong>Symbol: </strong>{/*singleStock[0].symbol*/}
+                                                    <strong>Symbol: </strong>{this.state.symbol/*singleStock[0].symbol*/}
                                                 </div>
                                                 <div className="card-Content">
-                                                    <strong>Sector: </strong>{/*singleStock[0].sector*/}
+                                                    <strong>Sector: </strong>{this.state.sector/*singleStock[0].sector*/}
                                                 </div>
                                                 <div className="card-Content">
-                                                    <strong>Sub-Industry: </strong>{/*singleStock[0].subIndustry*/}
+                                                    <strong>Sub-Industry: </strong>{this.state.subindustry/*singleStock[0].subIndustry*/}
                                                 </div>
                                                 <div className="card-Content">
-                                                    <strong>Address: </strong>{/*singleStock[0].address*/}
+                                                    <strong>Address: </strong>{this.state.address/*singleStock[0].address*/}
                                                 </div>
                                                 
                                             </div>
                                         </article>
                                         
                                     </div>
-                                    <BarChart></BarChart>
+                                    <BarChart users={this.props.userPath}></BarChart>
                                 </div>
                             </div>
                         </div>

@@ -56,7 +56,7 @@ class SingleUser extends Component {
             return stockSymbol.symbol === symbolName;
             
         });*/
-
+    console.log(this.state.path);
         let toDisplay = <StockSummary userPath={this.state.path}></StockSummary>;
         
         if (this.state.prevClick === "Port") { 
