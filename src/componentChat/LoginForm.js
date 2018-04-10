@@ -30,8 +30,8 @@ export default class LoginForm extends Component {
 
 	handleChange = (e)=>{
 		this.setState({nickname:e.target.value})
-	}
-
+		
+}
 	setError = (error)=>{
 		this.setState({error})
 	}
@@ -51,7 +51,7 @@ export default class LoginForm extends Component {
 						id="nickname"
 						value={nickname}
 						onChange={this.handleChange}
-						placeholder={'MYCoolUSername'}
+						placeholder={'Choose a nickname'}
 						/>
 						<div className="error">{error ? error:null}</div>
 

@@ -41,6 +41,7 @@ class HeaderBar extends Component {
                             <NavLink className="navbar-item" to={ {pathname: "/Home"}}>Home</NavLink>
                             <NavLink className="navbar-item" to={ {pathname: "/Home/Users"}}>Users</NavLink>
                             <NavLink className="navbar-item" to={ {pathname: "/Home/Stocks"}}>Stocks</NavLink>
+                            <NavLink className="navbar-item" to={ {pathname: "/Home/Chat"}}>Chat</NavLink>
                             <NavLink className="navbar-item" to={ {pathname: "/Home/About Us"}}>About Us</NavLink>
                         </div>
                     </div>

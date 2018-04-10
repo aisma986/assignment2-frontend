@@ -114,7 +114,7 @@ class App extends Component {
           <Route path="/Home/Users/:id" exact component={SingleUser}/>
           <Route path="/Home/Stocks/:symbol" exact component={SingleStock}/>
           <Route path="/Home/Stock Visualizer" exact component={Visualizer}/>
-          <Route path="/Home/Chat" exact component={Chat} />
+          <Route path="/Home/Chat" exact render={()=>(  <Chat userData={this.state.user}/>)}  />
         </main>
       </div>
     );
