@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-//import axios from 'axios';
+import axios from 'axios';
 import '../App.css';
 import StockList from './StockList.js';
 //import stocks from '../data/stocks.json';
@@ -14,22 +14,24 @@ class SingleUser extends Component {
             path: this.props.match.params.symbol,
             hideDet: true,
             hidePort: true,
-
+            name: null,
+            companies: [],
             prevClick: null
         };
         
         this.hideDetails = this.hideDetails.bind(this);
         this.hidePortfolio = this.hidePortfolio.bind(this);
     }
-/*    componentDidMount() {
-        axios.get('https://comp4513assignment2-backend.herokuapp.com/api/average/prices/AMZN')
+    componentDidMount() {
+        axios.get('https://comp4513assignment2-backend.herokuapp.com/api/company/' + this.props.match.params.symbol)
             .then(response => {
-                this.setState({users: response.data.name});
+                this.setState({companies: response.data});
+                this.setState({name: response.data[0].name});
             })
             .catch(function (error) {
                 alert('Error with api call error=' + error);
             });
-*/  
+    }
 /*        componentDidMount() {
         axios.get('https://jsonplaceholder.typicode.com/users/' + this.state.path)
             .then(response => {
@@ -57,6 +59,8 @@ class SingleUser extends Component {
             
         });*/
     console.log(this.state.path);
+    console.log(this.state.name);
+    console.log(this.state.companies);
         let toDisplay = <StockSummary userPath={this.state.path}></StockSummary>;
         
         if (this.state.prevClick === "Port") { 
@@ -73,6 +77,7 @@ class SingleUser extends Component {
                             <figure className="image is 640x480">
                                 <img className="SVG-two" src={"/logos/" + this.state.path + ".svg"} alt=""></img>
                             </figure>
+                            <div className="is-centered">{this.state.name}</div>
                         </div>
                     <p className="title is-5"><strong>{this.state.users}</strong></p>
                 </header>

@@ -10,7 +10,7 @@ const HeaderMenu = () => <Route path='*' render={props => {
         place = "User";
     }
     parts = parts.slice(1, parts.length - 1);
-    return <nav className="breadcrumb is-medium is-centered" aria-label="breadcrumbs"><ul><li>{parts.map(breadcrumb)}{place}</li></ul></nav>}} />;
+    return <nav className="breadcrumb is-small is-centered" aria-label="breadcrumbs"><ul><li>{parts.map(breadcrumb)}{place}</li></ul></nav>}} />;
     
 const breadcrumb = (part, partIndex, parts) => {
     const path = ['', ...parts.slice(0, partIndex + 1)].join("/");

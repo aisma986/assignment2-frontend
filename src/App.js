@@ -7,10 +7,10 @@ import CompanyBrowser from './containers/CompanyBrowser.js';
 import PortfolioBrowser from './containers/PortfolioBrowser.js';
 import SingleUser from './containers/SingleUser.js';
 import Home from './containers/Home.js';
+import Visualizer from './containers/Visualizer.js';
 //import Form from './containers/Form.js';
 import SingleStock from './containers/SingleStock.js';
 import axios from 'axios';
-  
 class App extends Component {
   
  constructor(props) {
@@ -59,40 +59,58 @@ class App extends Component {
              console.log(response);
              this.setLoginState(true);
              this.setState({user:response.data});
+     
         }
     }.bind(this));
   }
-
+  
   render() {
    if (!this.state.status){
      return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Username:
-          <input type="text" value={this.state.userEmail} onChange={this.setUserEmail} />
-          Password:
-          <input type="text" value={this.state.password} onChange={this.setPassword} />
-        </label>
-        <input type="submit" value="Submit"/>
+    <div>   
+    <HeaderApp />
+      <form className="column is-half" onSubmit={this.handleSubmit}>
+        <div className="field">
+          <p className="control has-icons-left has-icons-right">
+            <input className="input" type="email" placeholder="Email" value={this.state.userEmail} onChange={this.setUserEmail} />
+            <span className="icon is-small is-left">
+              <i className="fas fa-envelope"></i>
+            </span>
+            <span className="icon is-small is-right">
+              <i className="fas fa-check"></i>
+            </span>
+          </p>
+        </div>
+        <div className="field">
+          <p className="control has-icons-left">
+            <input className="input" type="password" placeholder="Password" value={this.state.password} onChange={this.setPassword} />
+            <span className="icon is-small is-left">
+              <i className="fas fa-lock"></i>
+            </span>
+          </p>
+        </div>
+        <div className="field">
+          <p className="control">
+            <input className="button is-success" type="submit" value="Login"/>
+          </p>
+        </div>
       </form>
+    </div>
     );
    }
     else {
-   
-    return (
+   return (
+  
       <div>
         <HeaderApp />
         <main>
           <Route path="/" exact component={Home} />
-          <Route path="/Home" exact component={Home} />
-          
-                 
-          <Route exact path="/Home/Users"  render={()=>(  <UserBrowser userData={this.state.user}/>)}/>
-         
-          <Route path="/Home/Stocks" exact component={CompanyBrowser} />
-          <Route path="/Home/About Us" exact component={PortfolioBrowser} />
-          <Route path="/Home/Users/:id" exact component={SingleUser} />
-          <Route path="/Home/Stocks/:symbol" exact component={SingleStock} />
+          <Route path="/Home" exact render={()=>(  <Home userData={this.state.user}/>)} />
+          <Route path="/Home/Stocks" exact component={CompanyBrowser}/>
+          <Route path="/Home/About Us" exact component={PortfolioBrowser}/>
+          <Route path="/Home/Users/:id" exact component={SingleUser}/>
+          <Route path="/Home/Stocks/:symbol" exact component={SingleStock}/>
+          <Route path="/Home/Stock Visualizer" exact component={Visualizer}/>
         </main>
       </div>
     );

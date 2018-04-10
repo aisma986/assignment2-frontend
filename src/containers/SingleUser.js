@@ -19,6 +19,7 @@ class SingleUser extends Component {
     }
     
         componentDidMount() {
+        //console.log(this.props.user);
         axios.get('https://jsonplaceholder.typicode.com/users/' + this.state.path)
             .then(response => {
                 this.setState({users: response.data.name});

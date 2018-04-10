@@ -25,9 +25,9 @@ class StockSummary extends Component {
             .then(response => {
                 this.setState({stocks: response.data});
                 this.setState({symbol: response.data[0].symbol});
-                this.setState({symbol: response.data[0].sector});
-                this.setState({symbol: response.data[0].subindustry});
-                this.setState({symbol: response.data[0].address});
+                this.setState({sector: response.data[0].sector});
+                this.setState({subIndustry: response.data[0].subindustry});
+                this.setState({address: response.data[0].address});
                 
             }) 
             
@@ -43,9 +43,9 @@ class StockSummary extends Component {
             return stockSymbol.symbol === symbolName;
             
         });*/
-        console.log(this.props.userPath);
-        console.log(this.state.stocks);
-        console.log(this.state.symbol);
+        //console.log(this.props.userPath);
+        //console.log(this.state.stocks);
+        //console.log(this.state.symbol);
         return (
                 <section className="column">
                     <nav className="panel">
@@ -71,7 +71,7 @@ class StockSummary extends Component {
                                                     <strong>Sector: </strong>{this.state.sector/*singleStock[0].sector*/}
                                                 </div>
                                                 <div className="card-Content">
-                                                    <strong>Sub-Industry: </strong>{this.state.subindustry/*singleStock[0].subIndustry*/}
+                                                    <strong>Sub-Industry: </strong>{this.state.subIndustry/*singleStock[0].subIndustry*/}
                                                 </div>
                                                 <div className="card-Content">
                                                     <strong>Address: </strong>{this.state.address/*singleStock[0].address*/}

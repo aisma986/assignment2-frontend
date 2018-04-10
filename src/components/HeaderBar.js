@@ -8,11 +8,16 @@ class HeaderBar extends Component {
             addActive: true,
         };
         this.isActive = this.isActive.bind(this);
+        this.refreshPage = this.refreshPage.bind(this);
     }    
     
     isActive() {
         const currentState = this.state.addActive;
         this.setState( {addActive: !currentState} );
+    }
+    
+    refreshPage(){
+      window.location.reload();  
     }
     render() {
     return (
@@ -29,7 +34,7 @@ class HeaderBar extends Component {
             </div>
             <div id="navbarExampleTransparentExample" className={this.state.addActive ? "navbar-menu": "navbar-menu is-active"} onClick={this.isActive}>
                 <div className="navbar-end">
-                    <div className="navbar-item has-dropdown is-hoverable">
+                    <div className="navbar-item button has-dropdown is-hoverable">
                         <NavLink className="navbar-link" to={ {pathname: "/Home"}}>Menu</NavLink>
                         
                         <div className="navbar-dropdown is-boxed is-active">
@@ -41,6 +46,7 @@ class HeaderBar extends Component {
                     </div>
                 </div>
             </div>
+            <a to="" refresh="true" className="button is-pulled-right" onClick={this.refreshPage}> Logout </a>
         </nav>
     );
 }

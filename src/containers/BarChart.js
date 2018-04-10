@@ -142,7 +142,7 @@ class BarChart extends Component {
         console.log(this.state.values);
         console.log(this.state.price);
         console.log(this.state.stocks.length);*/
-        console.log(this.props.users);
+        //console.log(this.props.users);
         
         return (
             <div className="card-Content">

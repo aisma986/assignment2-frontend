@@ -1,149 +1,117 @@
 import React, { Component } from 'react';
-import userStocks from '../data/userStockPortfolio.json';
-import stocks from '../data/stocks.json';
+//import userStocks from '../data/userStockPortfolio.json';
+//import stocks from '../data/stocks.json';
 import '../App.css';
-import { Link } from 'react-router-dom';
+import axios from 'axios';
+//import { Link } from 'react-router-dom';
 
 
 class StockList extends Component {
     
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
+            stocks: [],
+            path: this.props.userPath,
             sortSymbol: false,
             sortName: false,
             sortAmount: false,
-            prevClick: null
+            prevClick: null,
+            addActive: true,
+            selectValue: null,
+            date: null,
+            low: null,
+            high: null,
+            close: null,
+            Month: null
         };        
+        this.isActive = this.isActive.bind(this);
+        this.addMonth = this.addMonth.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+    }
+    
+    addMonth() {
+        //const currentState = this.state.month;
+        this.setState( {Month: "January"} );
+    }   
+    
+    isActive() {
+        const currentState = this.state.addActive;
+        this.setState( {addActive: !currentState} );
+    }
 
-        this.sortSymbols = this.sortSymbols.bind(this);
-        this.sortNames = this.sortNames.bind(this);
-        this.sortAmounts = this.sortAmounts.bind(this);
+    handleChange(e){
+    this.setState({selectValue: e.target.value});
+    console.log(e.target.value);
+    if(e.target.value !== "dropdown") {
+           axios.get('https://comp4513assignment2-backend.herokuapp.com/api/prices/' + e.target.value + '/' + this.state.path)
+            .then(response => {
+                this.setState({stocks: response.data});
+            }) 
+            
+            .catch(function (error) {
+                alert('Error with api call error=' + error);
+            });
     }
     
-    sortSymbols() {
-        this.setState( { sortSymbol: !this.state.sortSymbol } );
-        this.setState( { prevClick: "symbol" } );
-    }
-    
-    sortNames() {
-        this.setState( { sortName: !this.state.sortName } );
-        this.setState( { prevClick: "name" } );
-    }
-    
-    sortAmounts() {
-        this.setState( { sortAmount: !this.state.sortAmount } );
-        this.setState( { prevClick: "amount" } );
-    }
+  }
+  
+
     
     render() {
+        //let tempArray = [];
+        console.log(this.state.stocks);
+        console.log(this.state.path);
         
-        let currentId = parseInt(this.props.userPath, 10);
+
         
-        let singlePortfolio = userStocks.filter(function(id) { 
-            return id.userId === currentId
-            
-        });
-
-        let tempArray = [];
-
-        for (let j = 0; j < stocks.length; j++) {
-            for ( let i = 0; i < singlePortfolio.length; i++){
-                if (singlePortfolio[i].symbol === stocks[j].symbol) {
-                    let tempObj = {symbol: singlePortfolio[i].symbol,
-                                amount: singlePortfolio[i].amount,
-                                name: stocks[j].name};
-                    tempArray.push(tempObj);
-                    tempObj = null;
-                }
-            }
-        }
-
-        tempArray.sort(function(top, bottom){
-            var prev = top.name.toLowerCase();
-            var next = bottom.name.toLowerCase();
-            if (prev < next) {
-                return -1;
-            }
-            if (prev > next) {
-                return 1;
-            }
-                return 0;
-        });
-        
-        if (this.state.sortName === true && this.state.prevClick === "name") {
-            tempArray.sort(function(bottom, top){
-                var prev = top.name.toLowerCase();
-                var next = bottom.name.toLowerCase();
-                if (prev < next) {
-                    return -1;
-                }
-                if (prev > next) {
-                    return 1;
-                }
-                 return 0;
-            });    
-        }
-
-        if (this.state.sortSymbol === true && this.state.prevClick === "symbol") {
-            tempArray.sort(function(bottom, top){
-                var prev = top.symbol.toLowerCase();
-                var next = bottom.symbol.toLowerCase();
-                if (prev < next) {
-                    return -1;
-                }
-                if (prev > next) {
-                return 1;
-                }
-                return 0;
-            });    
-        }
-        if (this.state.sortSymbol === false && this.state.prevClick === "symbol") {
-            tempArray.sort(function(top, bottom){
-                var prev = top.symbol.toLowerCase();
-                var next = bottom.symbol.toLowerCase();
-                if (prev < next) {
-                    return -1;
-                }
-                if (prev > next) {
-                return 1;
-                }
-                return 0;
-            });    
-        }
-        if (this.state.sortAmount === true && this.state.prevClick === "amount") {
-            tempArray.sort(function(bottom, top){
-                return top.amount - bottom.amount;
-            });
-        }
-        if (this.state.sortAmount === false && this.state.prevClick === "amount") {
-            tempArray.sort(function(top, bottom){
-                return top.amount - bottom.amount;
-            });   
-        }
         
         return (
+            <section className="column">
+                <div className="select">
+                    <select onChange={this.handleChange}>
+                        <option value="dropdown">Select dropdown</option>
+                        <option value="01">January</option>
+                        <option value="02">February</option>
+                        <option value="03">March</option>
+                        <option value="04">April</option>
+                        <option value="05">May</option>
+                        <option value="06">June</option>
+                        <option value="07">July</option>
+                        <option value="08">August</option>
+                        <option value="09">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select>
+
+                    {console.log(this.state.selectValue)}
+                    {console.log(this.state.stocks)}
+                </div>
             <div className="card">
             <table className="table is-fullwidth">
                 <thead>
                     <tr>
-                    <th className="pointer" onClick={this.sortSymbols}>Symbol</th>
-                    <th className="pointer" onClick={this.sortNames}>Name</th>
+                    <th className="pointer" onClick={this.sortSymbols}>Date</th>
+                    <th className="pointer" onClick={this.sortNames}>Low</th>
                     {console.log(this.state.sortName)}
-                    <th className="pointer" onClick={this.sortAmounts}>Amount</th>
+                    <th className="pointer" onClick={this.sortAmounts}>High</th>
+                    <th className="pointer" onClick={this.sortAmounts}>Open</th>
                     </tr>
                 </thead>
                 <tbody>
                     {
-                        tempArray.map ((user, index) => {
+                        this.state.stocks.map ((user, index) => {
                         return(
-                            <tr key={index}><td><Link to={"/Home/Stocks/" + user.symbol}>{user.symbol}</Link></td><td><Link to={"/Home/Stocks/" + user.symbol}>{user.name}</Link></td><td>{user.amount}</td></tr>      
+                            <tr key={index}><td>{user.date}</td><td>{user.low}</td><td>{user.high}</td><td>{user.open}</td></tr>      
                             );
                         })
                     }
                 </tbody>
             </table>
             </div>
+
+            </section>
         );
     }
 }

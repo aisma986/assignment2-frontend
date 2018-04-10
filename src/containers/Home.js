@@ -66,6 +66,24 @@ class Home extends Component {
                         
                     </div>
                 </div>
+                <div className="card">
+                    <div className="card-image">
+                        <figure className="image is-640x480">
+                            <img src="https://placeimg.com/640/480/arch/grayscale" alt="Placeholder"></img>
+                        </figure>
+                    </div>
+                    <div className="card-content">
+                        <div className="media">
+                        <div className="media-content">
+                            <p className="title is-4 has-text-centered">Find out more about stocks</p>
+                        </div>
+                        </div>
+                        <Link className="button is-primary is-fullwidth" to="/Home/Stock Visualizer">
+                            Stock Visualizer
+                        </Link>
+                        
+                    </div>
+                </div>
             </article>
             );
     }
