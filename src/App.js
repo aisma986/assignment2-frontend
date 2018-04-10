@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 //import { Redirect, Route } from 'react-router-dom';
+
+import './index2.css';
 import { Route } from 'react-router-dom';
 import HeaderApp from './components/HeaderApp.js';
 import UserBrowser from './containers/UserBrowser.js';
@@ -10,6 +12,7 @@ import Home from './containers/Home.js';
 import Visualizer from './containers/Visualizer.js';
 //import Form from './containers/Form.js';
 import SingleStock from './containers/SingleStock.js';
+import Chat from './componentChat/Layout.js';
 import axios from 'axios';
 class App extends Component {
   
@@ -111,6 +114,7 @@ class App extends Component {
           <Route path="/Home/Users/:id" exact component={SingleUser}/>
           <Route path="/Home/Stocks/:symbol" exact component={SingleStock}/>
           <Route path="/Home/Stock Visualizer" exact component={Visualizer}/>
+          <Route path="/Home/Chat" exact component={Chat} />
         </main>
       </div>
     );
