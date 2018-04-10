@@ -1,3 +1,8 @@
+//used youtube totorial to follow structure 
+//https://www.youtube.com/watch?v=84GXJANOYFw
+
+
+
 import React, { Component } from 'react';
 import io from 'socket.io-client'
 import { USER_CONNECTED, LOGOUT } from '../Events'
