@@ -21,6 +21,10 @@ class HeaderBar extends Component {
     }
     render() {
     return (
+        <div>
+        <div>
+        <a to="" refresh="true" className="button is-pulled-right" onClick={this.refreshPage}> Logout </a>
+        </div>
         <nav className="navbar is-transparent">
             <div className="navbar-brand">
             <a className="navbar-item" href="">
@@ -43,12 +47,17 @@ class HeaderBar extends Component {
                             <NavLink className="navbar-item" to={ {pathname: "/Home/Stocks"}}>Stocks</NavLink>
                             <NavLink className="navbar-item" to={ {pathname: "/Home/Chat"}}>Chat</NavLink>
                             <NavLink className="navbar-item" to={ {pathname: "/Home/About Us"}}>About Us</NavLink>
+                            
+                            
+                            
                         </div>
                     </div>
                 </div>
             </div>
-            <a to="" refresh="true" className="button is-pulled-right" onClick={this.refreshPage}> Logout </a>
+            
         </nav>
+        {/*<a to="" refresh="true" className="button is-pulled-right" onClick={this.refreshPage}> Logout </a>*/}
+        </div>
     );
 }
 }
