@@ -21,10 +21,8 @@ class HeaderBar extends Component {
     }
     render() {
     return (
-        <div>
-        <div>
-        <a to="" refresh="true" className="button is-pulled-right" onClick={this.refreshPage}> Logout </a>
-        </div>
+
+
         <nav className="navbar is-transparent">
             <div className="navbar-brand">
             <a className="navbar-item" href="">
@@ -54,10 +52,10 @@ class HeaderBar extends Component {
                     </div>
                 </div>
             </div>
-            
+            <a to="" refresh="true" className="button is-pulled-right" onClick={this.refreshPage}> Logout </a>
         </nav>
-        {/*<a to="" refresh="true" className="button is-pulled-right" onClick={this.refreshPage}> Logout </a>*/}
-        </div>
+        
+
     );
 }
 }
